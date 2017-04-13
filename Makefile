@@ -7,7 +7,7 @@ NAME_BUILD_CONTAINER ?=logentries-build-$(BUILD_TYPE)
 NAME_TEST_CONTAINER ?=logentries-test-$(BUILD_TYPE)
 NAME_EXPORT_CONTAINER ?=logentries-export-$(BUILD_TYPE)
 
-DOCKER_REGISTRY_PREFIX ?=logentries/logentries
+DOCKER_REGISTRY_PREFIX ?=017091164455.dkr.ecr.us-east-1.amazonaws.com/logentries
 DOCKER_REGISTRY_IMAGE_TAG_VERSION ?=$(shell node -e "console.log(require('./package.json').version);")
 
 # Use the alpine node 
@@ -47,7 +47,7 @@ test: ## Tests a previous build docker image to see if starts
 	@docker rm -f $(NAME_TEST_CONTAINER) > /dev/null 2>&1 || true
 
 tag: ## Tags a local build image to make it ready for push to docker registry
-	docker tag -f $(shell docker images -q $(NAME_BUILD_CONTAINER)) $(DOCKER_REGISTRY_PREFIX):$(DOCKER_REGISTRY_IMAGE_TAG_PREFIX)$(DOCKER_REGISTRY_IMAGE_TAG_VERSION)
+	docker tag $(shell docker images -q $(NAME_BUILD_CONTAINER)) $(DOCKER_REGISTRY_PREFIX):$(DOCKER_REGISTRY_IMAGE_TAG_PREFIX)$(DOCKER_REGISTRY_IMAGE_TAG_VERSION)
 
 
 push: ## Push the local image to the docker registry
