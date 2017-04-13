@@ -159,7 +159,7 @@ function cli() {
       'add': 'a'
     },
     default: {
-      json: false,
+      json: true,
       newline: true,
       stats: true,
       logs: true,
